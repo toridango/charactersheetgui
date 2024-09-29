@@ -1,0 +1,944 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpm37g7xg488k"]
+
+[ext_resource type="Script" path="res://control.gd" id="1_5rvec"]
+[ext_resource type="LabelSettings" uid="uid://d1urbypjiknwl" path="res://Name.tres" id="2_dnwq3"]
+[ext_resource type="LabelSettings" uid="uid://0dtyqtiu44b2" path="res://default.tres" id="3_5rb2r"]
+[ext_resource type="Script" path="res://gc_skills.gd" id="4_4ikj4"]
+[ext_resource type="Script" path="res://hbc_attributes.gd" id="4_1056b"]
+[ext_resource type="Texture2D" uid="uid://bw7th5tv5q78n" path="res://assets/noproficiency2.png" id="4_ph012"]
+[ext_resource type="Script" path="res://hbc_morestats.gd" id="7_25xqb"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5rvec")
+
+[node name="ButtonLoadActorFile" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1029.0
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 32.0
+text = "Load Actor File"
+script = ExtResource("1_5rvec")
+
+[node name="ActorFileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(800, 400)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+use_native_dialog = true
+
+[node name="ContainerBasicDetails" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 11.0
+offset_right = 66.0
+offset_bottom = 88.0
+
+[node name="VBCBasicDetails" type="VBoxContainer" parent="ContainerBasicDetails"]
+layout_mode = 2
+
+[node name="LabelName" type="Label" parent="ContainerBasicDetails/VBCBasicDetails"]
+layout_mode = 2
+text = "Name"
+label_settings = ExtResource("2_dnwq3")
+
+[node name="LabelSpecies" type="Label" parent="ContainerBasicDetails/VBCBasicDetails"]
+layout_mode = 2
+text = "Species"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="LabelType" type="Label" parent="ContainerBasicDetails/VBCBasicDetails"]
+layout_mode = 2
+text = "Type"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="LabelSize" type="Label" parent="ContainerBasicDetails/VBCBasicDetails"]
+layout_mode = 2
+text = "Size"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="MarginContainerStats" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 428.0
+offset_top = 15.0
+offset_right = 688.0
+offset_bottom = 111.0
+
+[node name="HBoxContainerStats" type="HBoxContainer" parent="MarginContainerStats"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("4_1056b")
+
+[node name="VBCStrength" type="VBoxContainer" parent="MarginContainerStats/HBoxContainerStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelAttr" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCStrength"]
+layout_mode = 2
+text = "STR"
+horizontal_alignment = 1
+
+[node name="LabelMod" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCStrength"]
+layout_mode = 2
+text = "+0"
+horizontal_alignment = 1
+
+[node name="LabelValue" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCStrength"]
+layout_mode = 2
+text = "10"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainerStats/HBoxContainerStats/VBCStrength"]
+layout_mode = 2
+
+[node name="CheckBoxProf" type="CheckBox" parent="MarginContainerStats/HBoxContainerStats/VBCStrength/HBoxContainer"]
+layout_mode = 2
+toggle_mode = false
+button_mask = 0
+
+[node name="LabelSave" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCStrength/HBoxContainer"]
+layout_mode = 2
+text = "+0
+"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="VBCDexterity" type="VBoxContainer" parent="MarginContainerStats/HBoxContainerStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelAttr" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCDexterity"]
+layout_mode = 2
+text = "DEX"
+horizontal_alignment = 1
+
+[node name="LabelMod" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCDexterity"]
+layout_mode = 2
+text = "+0"
+horizontal_alignment = 1
+
+[node name="LabelValue" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCDexterity"]
+layout_mode = 2
+text = "10"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainerStats/HBoxContainerStats/VBCDexterity"]
+layout_mode = 2
+
+[node name="CheckBoxProf" type="CheckBox" parent="MarginContainerStats/HBoxContainerStats/VBCDexterity/HBoxContainer"]
+layout_mode = 2
+button_mask = 0
+flat = true
+
+[node name="LabelSave" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCDexterity/HBoxContainer"]
+layout_mode = 2
+text = "+0
+"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="VBCConstitution" type="VBoxContainer" parent="MarginContainerStats/HBoxContainerStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelAttr" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCConstitution"]
+layout_mode = 2
+text = "CON"
+horizontal_alignment = 1
+
+[node name="LabelMod" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCConstitution"]
+layout_mode = 2
+text = "+0"
+horizontal_alignment = 1
+
+[node name="LabelValue" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCConstitution"]
+layout_mode = 2
+text = "10"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainerStats/HBoxContainerStats/VBCConstitution"]
+layout_mode = 2
+
+[node name="CheckBoxProf" type="CheckBox" parent="MarginContainerStats/HBoxContainerStats/VBCConstitution/HBoxContainer"]
+layout_mode = 2
+button_mask = 0
+flat = true
+
+[node name="LabelSave" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCConstitution/HBoxContainer"]
+layout_mode = 2
+text = "+0
+"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="VBCIntelligence" type="VBoxContainer" parent="MarginContainerStats/HBoxContainerStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelAttr" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCIntelligence"]
+layout_mode = 2
+text = "INT
+"
+horizontal_alignment = 1
+
+[node name="LabelMod" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCIntelligence"]
+layout_mode = 2
+text = "+0"
+horizontal_alignment = 1
+
+[node name="LabelValue" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCIntelligence"]
+layout_mode = 2
+text = "10"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainerStats/HBoxContainerStats/VBCIntelligence"]
+layout_mode = 2
+
+[node name="CheckBoxProf" type="CheckBox" parent="MarginContainerStats/HBoxContainerStats/VBCIntelligence/HBoxContainer"]
+layout_mode = 2
+button_mask = 0
+flat = true
+
+[node name="LabelSave" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCIntelligence/HBoxContainer"]
+layout_mode = 2
+text = "+0
+"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="VBCWisdom" type="VBoxContainer" parent="MarginContainerStats/HBoxContainerStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelAttr" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCWisdom"]
+layout_mode = 2
+text = "WIS
+"
+horizontal_alignment = 1
+
+[node name="LabelMod" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCWisdom"]
+layout_mode = 2
+text = "+0"
+horizontal_alignment = 1
+
+[node name="LabelValue" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCWisdom"]
+layout_mode = 2
+text = "10"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainerStats/HBoxContainerStats/VBCWisdom"]
+layout_mode = 2
+
+[node name="CheckBoxProf" type="CheckBox" parent="MarginContainerStats/HBoxContainerStats/VBCWisdom/HBoxContainer"]
+layout_mode = 2
+button_mask = 0
+flat = true
+
+[node name="LabelSave" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCWisdom/HBoxContainer"]
+layout_mode = 2
+text = "+0
+"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="VBCCharisma" type="VBoxContainer" parent="MarginContainerStats/HBoxContainerStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelAttr" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCCharisma"]
+layout_mode = 2
+text = "CHA
+"
+horizontal_alignment = 1
+
+[node name="LabelMod" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCCharisma"]
+layout_mode = 2
+text = "+0"
+horizontal_alignment = 1
+
+[node name="LabelValue" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCCharisma"]
+layout_mode = 2
+text = "10"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainerStats/HBoxContainerStats/VBCCharisma"]
+layout_mode = 2
+
+[node name="CheckBoxProf" type="CheckBox" parent="MarginContainerStats/HBoxContainerStats/VBCCharisma/HBoxContainer"]
+layout_mode = 2
+button_mask = 0
+flat = true
+
+[node name="LabelSave" type="Label" parent="MarginContainerStats/HBoxContainerStats/VBCCharisma/HBoxContainer"]
+layout_mode = 2
+text = "+0
+"
+label_settings = ExtResource("3_5rb2r")
+
+[node name="MarginContainerSkills" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 111.0
+offset_right = 197.0
+offset_bottom = 611.0
+
+[node name="GridContainerSkills" type="GridContainer" parent="MarginContainerSkills"]
+layout_mode = 2
+columns = 4
+script = ExtResource("4_4ikj4")
+prof_textures = {
+"0": "res://assets/noproficiency2.png",
+"0.5": "res://assets/half_proficiency2.png",
+"1": "res://assets/proficiency2.png",
+"2": "res://assets/expertise2.png"
+}
+
+[node name="TitleProf" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Prof."
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="TitleMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Mod"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="TitleSkill" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Skill"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="TitleBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Bonus"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="MCAcrTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="AcrTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCAcrTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AcrMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Dex"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="AcrName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Acrobatics"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="AcrBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCAniTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="AniTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCAniTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AniMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Wis"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="AniName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Animal Handling"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="AniBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCArcTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="ArcTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCArcTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ArcMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Int
+"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="ArcName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Arcana"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="ArcBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCAthTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="AthTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCAthTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AthMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Str"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="AthName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Athletics"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="AthBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCDecTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="DecTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCDecTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DecMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Cha"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="DecName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Deception"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="DecBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCHisTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HisTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCHisTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HisMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Int"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="HisName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "History"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="HisBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCInsTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="InsTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCInsTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InsMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Wis"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="InsName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Insight"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="InsBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCItmTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="ItmTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCItmTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItmMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Cha"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="ItmName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Intimidation"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="ItmBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCInvTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="InvTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCInvTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InvMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Int"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="InvName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Investigation"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="InvBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCMedTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="MedTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCMedTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MedMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Wis"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="MedName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Medicine"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="MedBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCNatTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="NatTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCNatTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NatMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Int"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="NatName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Nature"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="NatBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCPrcTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="PrcTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCPrcTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PrcMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Wis"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="PrcName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Perception"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="PrcBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCPrfTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="PrfTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCPrfTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PrfMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Cha"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="PrfName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Performance"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="PrfBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCPerTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="PerTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCPerTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PerMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Cha"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="PerName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Persuasion"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="PerBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCRelTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="RelTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCRelTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RelMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Int"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="RelName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Religion"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="RelBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCSltTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="SltTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCSltTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SltMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Dex"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="SltName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Sleight of Hand"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="SltBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCSteTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="SteTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCSteTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SteMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Dex"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="SteName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Stealth"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="SteBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MCSurTex" type="MarginContainer" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="SurTex" type="TextureRect" parent="MarginContainerSkills/GridContainerSkills/MCSurTex"]
+layout_mode = 2
+texture = ExtResource("4_ph012")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SurMod" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Wis"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="SurName" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "Survival"
+label_settings = ExtResource("3_5rb2r")
+horizontal_alignment = 1
+
+[node name="SurBonus" type="Label" parent="MarginContainerSkills/GridContainerSkills"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="MarginContainerMore" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 21.0
+offset_right = 284.0
+offset_bottom = 61.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainerMore"]
+layout_mode = 2
+script = ExtResource("7_25xqb")
+
+[node name="HBCProficiency" type="HBoxContainer" parent="MarginContainerMore/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelProficiency" type="Label" parent="MarginContainerMore/VBoxContainer/HBCProficiency"]
+layout_mode = 2
+text = "Proficiency"
+horizontal_alignment = 2
+
+[node name="LabelPB" type="Label" parent="MarginContainerMore/VBoxContainer/HBCProficiency"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "+2"
+
+[node name="HBCInitiative" type="HBoxContainer" parent="MarginContainerMore/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelInitiative" type="Label" parent="MarginContainerMore/VBoxContainer/HBCInitiative"]
+layout_mode = 2
+text = "Initiative"
+horizontal_alignment = 2
+
+[node name="LabelInit" type="Label" parent="MarginContainerMore/VBoxContainer/HBCInitiative"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "+0"
+
+[node name="HBCSpeed" type="HBoxContainer" parent="MarginContainerMore/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelSpeed" type="Label" parent="MarginContainerMore/VBoxContainer/HBCSpeed"]
+layout_mode = 2
+text = "Speed"
+
+[node name="LabelSpeedList" type="Label" parent="MarginContainerMore/VBoxContainer/HBCSpeed"]
+custom_minimum_size = Vector2(75, 20)
+layout_mode = 2
+size_flags_vertical = 1
+text = "30ft walk"
+label_settings = ExtResource("3_5rb2r")
+autowrap_mode = 3
+
+[node name="MarginContainerSpeed" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 732.0
+offset_top = 21.0
+offset_right = 859.0
+offset_bottom = 44.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainerSpeed"]
+layout_mode = 2
+
+[connection signal="button_down" from="ButtonLoadActorFile" to="." method="_on_loadactorfile_button_down"]
+[connection signal="file_selected" from="ActorFileDialog" to="." method="_on_actorfiledialog_file_selected"]
+[connection signal="toggled" from="MarginContainerStats/HBoxContainerStats/VBCStrength/HBoxContainer/CheckBoxProf" to="." method="_on_str_prof_toggled"]
+[connection signal="toggled" from="MarginContainerStats/HBoxContainerStats/VBCDexterity/HBoxContainer/CheckBoxProf" to="." method="_on_dex_prof_toggled"]
+[connection signal="toggled" from="MarginContainerStats/HBoxContainerStats/VBCConstitution/HBoxContainer/CheckBoxProf" to="." method="_on_con_prof_toggled"]
+[connection signal="toggled" from="MarginContainerStats/HBoxContainerStats/VBCIntelligence/HBoxContainer/CheckBoxProf" to="." method="_on_int_prof_toggled"]
+[connection signal="toggled" from="MarginContainerStats/HBoxContainerStats/VBCWisdom/HBoxContainer/CheckBoxProf" to="." method="_on_wis_prof_toggled"]
+[connection signal="toggled" from="MarginContainerStats/HBoxContainerStats/VBCCharisma/HBoxContainer/CheckBoxProf" to="." method="_on_cha_prof_toggled"]
